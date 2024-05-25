@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 import Logo from "../components/Logo";
 import { COLORS } from "../enums";
 import TabView from "../components/TabView";
+import Login from "../components/Login";
 
 const AuthHeader = () => {
   return (
@@ -19,9 +20,7 @@ const AuthBody = () => {
   return (
     <View style={styles.body}>
       <TabView tabs={["Login", "Register"]}>
-        <View>
-          <Text>Login</Text>
-        </View>
+        <Login />
         <View>
           <Text>Register</Text>
         </View>
@@ -70,6 +69,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    padding: 15,
   },
   container: {
     flex: 1,

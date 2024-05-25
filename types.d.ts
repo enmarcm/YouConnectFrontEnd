@@ -18,3 +18,16 @@ export interface GradientBackgroundProps {
   start?: { x: number; y: number };
   end?: { x: number; y: number };
 }
+
+export interface StylesErrorInputs {
+  textInput: CSSProperties;
+  container: CSSProperties;
+  errorContainer: CSSProperties;
+}
+
+export interface UseInputStylesProps {
+  type: string;
+  style: CSSProperties;
+  error: string;
+  styles: StylesErrorInputs;
+}

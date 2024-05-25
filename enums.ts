@@ -1,6 +1,6 @@
 export enum ROUTES {
   START = "/",
-  AUTH="/auth",
+  AUTH = "/auth",
   HOME = "/home",
   PROFILE = "/profile",
   SETTINGS = "/settings",
@@ -15,4 +15,10 @@ export enum COLORS {
   BG = "#326729",
   WHITE = "#FFFFFF",
   BLACK = "#000000",
+}
+
+export enum ICONS {
+  email = "mail-outline",
+  password = "lock-closed-outline",
+  user = "person-outline",
 }
