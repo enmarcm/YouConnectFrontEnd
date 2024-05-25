@@ -4,22 +4,36 @@ import { Formik } from "formik";
 import ButtonCustom from "./ButtonCustom";
 import FormikInputValue from "./FormikInputValue";
 import { loginValidationSchema } from "../schemas/login";
+import useFetcho from "../customHooks/useFetcho";
+import { URL_REQUEST } from "../enums";
 
 const Login = () => {
+  const fetchWithLoading = useFetcho();
   const initialValues = {
     email: "",
     password: "",
+  };
+
+  const handleSubmitFunction = async (values: any) => {
+    console.log(values);
+    const data = await fetchWithLoading({
+      url: URL_REQUEST.URL_BASE,
+      method: "GET",
+    });
+
+    Alert.alert("Values", JSON.stringify(values));
+    Alert.alert("Data", JSON.stringify(data));
   };
 
   return (
     <Formik
       validationSchema={loginValidationSchema}
       initialValues={initialValues}
-      onSubmit={(values) => Alert.alert(JSON.stringify(values))} //Aqui vamos a hacer la peticion a la API
+      onSubmit={handleSubmitFunction} //!Aqui vamos a hacer la peticion a la API
     >
       {({ handleSubmit }) => {
         return (
-          <View>
+          <View style={{ gap: 10 }}>
             <FormikInputValue name="email" type="email" placeholder="E-mail" />
             <FormikInputValue
               name="password"

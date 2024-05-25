@@ -31,3 +31,21 @@ export interface UseInputStylesProps {
   error: string;
   styles: StylesErrorInputs;
 }
+
+export interface LoadingContextProps {
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+
+export interface FetchoParams {
+  url: string;
+  method?: HttpMethod;
+  body?: Record<string, unknown>;
+  isCors?: boolean;
+}
+
+export interface PropsChildren {
+  children: ReactNode;
+}

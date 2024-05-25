@@ -22,3 +22,7 @@ export enum ICONS {
   password = "lock-closed-outline",
   user = "person-outline",
 }
+
+export enum URL_REQUEST {
+  URL_BASE = "https://youconnect-production.up.railway.app/",
+}

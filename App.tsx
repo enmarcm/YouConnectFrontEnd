@@ -1,12 +1,13 @@
 import { NativeRouter } from "react-router-native";
 import Main from "./components/Main";
-import { Text } from "react-native";
+import { LoadingProvider } from "./context/LoadingContext";
 
 export default function App() {
   return (
     <NativeRouter>
-      <Main />
+      <LoadingProvider>
+        <Main />
+      </LoadingProvider>
     </NativeRouter>
   );
 }
-

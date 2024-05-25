@@ -19,7 +19,7 @@ const InputCustom = ({ style = {}, type = "text", error, ...props }) => {
   const translateY = useFocusAnimation(props.focus);
 
   return (
-    <Animated.View style={[styles.view, { transform: [{ translateY }] }]}>
+    <Animated.View style={[, { transform: [{ translateY }] }]}>
       <View style={containerStyle}>
         {type in ICONS && <Icon name={ICONS[type]} size={20} />}
         <TextInput
@@ -63,10 +63,7 @@ const styles = StyleSheet.create({
     color: "red",
     marginTop: -15,
     marginLeft: 10,
-  },
-  view: {
-    marginVertical: 10,
-  },
+  }
 });
 
 export default InputCustom;
