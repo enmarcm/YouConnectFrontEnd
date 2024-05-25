@@ -14,7 +14,7 @@ const Login = () => {
     password: "",
   };
 
-  const handleSubmitFunction = async (values: any) => {
+  const handleSubmitFunction = async (values: any, { resetForm }) => {
     console.log(values);
     const data = await fetchWithLoading({
       url: URL_REQUEST.URL_BASE,
