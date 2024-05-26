@@ -4,6 +4,7 @@ import GradientBackground from "../components/GradientBackground";
 import { COLORS } from "../enums";
 import FormikInputValue from "../components/FormikInputValue";
 import { Formik } from "formik";
+import ContactsView from "../components/ContactView";
 
 const Contacts = () => {
   const initialValues = {
@@ -12,14 +13,15 @@ const Contacts = () => {
   const handleSubmitFunction = async (values: any, { resetForm }) => {};
 
   return (
+    <View style={styles.container}>
     <GradientBackground style={styles.body}>
       <Formik initialValues={initialValues} onSubmit={handleSubmitFunction}>
         {({ handleSubmit }) => {
           return (
             <View>
               <FormikInputValue
-                name="contact"
-                type="contact"
+                name="Contacts"
+                type="Contacts"
                 placeholder="Search"
               />
             </View>
@@ -27,6 +29,8 @@ const Contacts = () => {
         }}
       </Formik>
     </GradientBackground>
+    <ContactsView />
+    </View>
   );
 };
 
