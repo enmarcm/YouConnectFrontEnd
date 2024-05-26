@@ -4,6 +4,7 @@ import Logo from "../components/Logo";
 import { COLORS } from "../enums";
 import TabView from "../components/TabView";
 import Login from "../components/Login";
+import Register from "../components/Register";
 
 const AuthHeader = () => {
   return (
@@ -22,7 +23,7 @@ const AuthBody = () => {
       <TabView tabs={["Login", "Register"]}>
         <Login />
         <View>
-          <Text>Register</Text>
+          <Register />
         </View>
       </TabView>
     </View>
@@ -31,7 +32,7 @@ const AuthBody = () => {
 
 const Auth = () => {
   return (
-    <GradientBackground>
+    <GradientBackground style={styles.gradiant}>
       <View style={styles.container}>
         <AuthHeader />
         <AuthBody />
@@ -47,6 +48,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  gradiant:{
+    flex: 1,
   },
   logoContainer: {
     marginRight: 20,

@@ -8,6 +8,7 @@ const useFetcho = () => {
 
   const fetchWithLoading = async (params: FetchoParams) => {
     setIsLoading(true);
+    console.log(params);
     const data = await fetcho(params).catch((error) => {
       console.error(
         `An error occurred while fetching, the url was ${params.url} and the error was ${error.message}`

@@ -7,10 +7,10 @@ const fetcho = async ({
   isCors = false,
 }: FetchoParams): Promise<Record<string, unknown> | false> => {
   try {
-    const config: RequestInit = {
+    const config: any = {
       method,
       credentials: "include",
-      mode: isCors ? "cors" : "no-cors",
+      cors: isCors ? "cors" : "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -18,16 +18,21 @@ const fetcho = async ({
 
     if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {
       config.body = JSON.stringify(body);
+      console.log("body", body);
     }
-
+    // console.log("config", config);
+    // console.log("url", url);
     const response = await fetch(url, config);
 
-    if (!response.ok)
+    if (!response.ok){
+      console.log(response);
       throw new Error(
         `La respuesta no es correcta, el status es ${response.status}`
       );
+    }
 
     const data = await response.json();
+    // console.log("data", data);
 
     return data;
   } catch (error) {

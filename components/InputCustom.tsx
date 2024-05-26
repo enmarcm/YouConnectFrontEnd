@@ -19,7 +19,7 @@ const InputCustom = ({ style = {}, type = "text", error, ...props }) => {
   const translateY = useFocusAnimation(props.focus);
 
   return (
-    <Animated.View style={[, { transform: [{ translateY }] }]}>
+    <Animated.View style={[ { transform: [{ translateY }] }]}>
       <View style={containerStyle}>
         {type in ICONS && <Icon name={ICONS[type]} size={20} />}
         <TextInput
@@ -47,9 +47,11 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderWidth: 1,
     borderColor: "#ccc",
+    backgroundColor: "#f9f9f9",
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginBottom: 20,
+    marginBottom: 7,
+    marginTop: 7,
     alignItems: "center",
   },
   errorContainer: {

@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     margin: 10,
     padding: 5,
+    position: 'absolute', // Añade esta línea
+    bottom: 0, // Añade esta línea
+    // width: '100%', // Añade esta línea
+    zIndex: 1, // Añade esta línea
   },
   tab: {
     flex: 1,
@@ -25,7 +29,7 @@ const styles = StyleSheet.create({
   childrenContainer: {
     flex: 1,
     backgroundColor: "transparent",
-    marginTop: 25,
+    // marginTop: 10,
   },
 });
 

@@ -10,17 +10,18 @@ import { URL_REQUEST } from "../enums";
 const Login = () => {
   const fetchWithLoading = useFetcho();
   const initialValues = {
-    email: "",
+    userName: "",
     password: "",
   };
 
   const handleSubmitFunction = async (values: any, { resetForm }) => {
     console.log(values);
     const data = await fetchWithLoading({
-      url: URL_REQUEST.URL_BASE,
-      method: "GET",
+      url: URL_REQUEST.URL_LOGIN,
+      method: "POST",
+      body: values,
     });
-
+    window.localStorage.setItem("UserLogged", JSON.stringify(data))
     Alert.alert("Values", JSON.stringify(values));
     Alert.alert("Data", JSON.stringify(data));
   };
@@ -34,11 +35,11 @@ const Login = () => {
       {({ handleSubmit }) => {
         return (
           <View style={{ gap: 10 }}>
-            <FormikInputValue name="email" type="email" placeholder="E-mail" />
+            <FormikInputValue name="userName" type="userName" placeholder="username" />
             <FormikInputValue
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="password"
             />
             <ButtonCustom onPress={handleSubmit}>Login</ButtonCustom>
           </View>
