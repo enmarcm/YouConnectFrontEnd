@@ -50,3 +50,19 @@ export interface FetchoParams {
 export interface PropsChildren {
   children: ReactNode;
 }
+
+export type TabViewProps = {
+  tabs: string[];
+  children: React.ReactNode[];
+  location?: "top" | "bottom";
+};
+
+export interface Tab {
+  title: string;
+  icon: ICONS;
+}
+
+export interface TabViewProps {
+  tabs: Tab[];
+  children: React.ReactNode[];
+}

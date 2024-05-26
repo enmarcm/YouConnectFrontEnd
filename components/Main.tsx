@@ -9,7 +9,6 @@ import { useBackButtonHandler } from "../customHooks/useBackButtonHandler";
 import Auth from "../pages/Auth";
 import Loader from "./Loader";
 import { LoadingContext } from "../context/LoadingContext";
-import Contacts from "../pages/Contacts";
 import Home from "../pages/Home";
 
 const Main = () => {
@@ -18,8 +17,6 @@ const Main = () => {
 
   return (
     <View style={viewStyle}>
-      {/* <AppBar/>  <-- En este ApppBar hay que meter lo de StatusBar -> Mientras lo pongo fuera*/}
-
       <StatusBar style="dark" />
       {isLoading ? (
         <Loader />

@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { COLORS } from "../enums";
+import { COLORS, ICONS } from "../enums";
 import useTab from "../customHooks/useTabs";
-import { TabViewProps } from "../types";
+import Icon from "react-native-vector-icons/Ionicons";
 
 // Styles
-const stylesFunct = (location: "top" | "bottom") =>
+const stylesFunct = () =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -13,36 +13,37 @@ const stylesFunct = (location: "top" | "bottom") =>
     tabsContainer: {
       flexDirection: "row",
       backgroundColor: COLORS.BG,
-      borderRadius: 30,
-      margin: 10,
       padding: 5,
-      position: location === "bottom" ? "absolute" : "relative",
-      bottom: location === "bottom" ? 0 : undefined,
-      zIndex: location === "bottom" ? 1 : undefined,
+      position: "absolute",
+      bottom: 0,
+      width: "100%",
+      height: 80,
+      zIndex: 1,
     },
     tab: {
       flex: 1,
       alignItems: "center",
-      padding: 10,
-      borderRadius: 30,
+      justifyContent: "center",
+      borderRadius: 15,
+      margin: 5,
     },
-    tabText: {},
+    tabText: {
+      color: "white",
+    },
     childrenContainer: {
       flex: 1,
       backgroundColor: "transparent",
+      marginBottom: 60,
     },
   });
 
-const TabView: React.FC<TabViewProps> = ({
-  tabs,
-  children,
-  location = "top",
-}) => {
+const AppBarCustom: React.FC<{ tabs: string[], children: React.ReactNode[] }> = ({ tabs, children }) => {
   const { activeTab, handlePress } = useTab(tabs);
-  const styles = stylesFunct(location);
+  const styles = stylesFunct();
 
   return (
     <View style={styles.container}>
+      <View style={styles.childrenContainer}>{children[activeTab]}</View>
       <View style={styles.tabsContainer}>
         {tabs.map((tab: string, index: number) => {
           const isActive = activeTab === index;
@@ -51,25 +52,22 @@ const TabView: React.FC<TabViewProps> = ({
               key={index}
               style={[
                 styles.tab,
-                { backgroundColor: isActive ? "white" : "transparent" },
+                {
+                  backgroundColor: isActive ? COLORS.SECONDARY : "transparent",
+                  elevation: isActive ? 5 : 0, // for Android
+                  shadowOpacity: isActive ? 0.5 : 0, // for iOS
+                },
               ]}
               onPress={() => handlePress(index)}
             >
-              <Text
-                style={[
-                  styles.tabText,
-                  { color: isActive ? "black" : "white" },
-                ]}
-              >
-                {tab}
-              </Text>
+              {tab in ICONS && <Icon name={ICONS[tab]} size={20} color="white" />}
+              <Text style={styles.tabText}>{tab}</Text>
             </TouchableOpacity>
           );
         })}
       </View>
-      <View style={styles.childrenContainer}>{children[activeTab]}</View>
     </View>
   );
 };
 
-export default TabView;
+export default AppBarCustom;

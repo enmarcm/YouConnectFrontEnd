@@ -24,7 +24,9 @@ export enum ICONS {
   user = "person-outline",
   email = "mail-outline",
   dateOfBirth = "calendar-outline",
-  contact = "search-outline",
+  Contacts = "search-outline",
+  Settings = "settings-outline",
+  Groups = "people-outline",
 }
 
 export enum URL_REQUEST {

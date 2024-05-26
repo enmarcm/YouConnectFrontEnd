@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "red",
-    marginTop: -15,
+    marginTop: -5,
     marginLeft: 10,
   }
 });
