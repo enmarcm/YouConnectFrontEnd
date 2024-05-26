@@ -21,7 +21,7 @@ const Login = () => {
       method: "POST",
       body: values,
     });
-
+    window.localStorage.setItem("UserLogged", JSON.stringify(data))
     Alert.alert("Values", JSON.stringify(values));
     Alert.alert("Data", JSON.stringify(data));
   };

@@ -22,8 +22,8 @@ const fetcho = async ({
       config.body = JSON.stringify(body);
       console.log("body", body);
     }
-    console.log("config", config);
-    console.log("url", url);
+    // console.log("config", config);
+    // console.log("url", url);
     const response = await fetch(url, config);
 
     if (!response.ok){
@@ -34,7 +34,7 @@ const fetcho = async ({
     }
 
     const data = await response.json();
-    console.log("data", data);
+    // console.log("data", data);
 
     return data;
   } catch (error) {

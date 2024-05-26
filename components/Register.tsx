@@ -17,7 +17,7 @@ const Register = () => {
     }
 
     const handleSubmitFunction = async (values: any, {resetForm}) => {
-        console.log(typeof values.dateOfBirth)
+        console.log(values)
         const data = await fetchWithLoading({
             url: URL_REQUEST.URL_REGISTER,
             method: "POST",
