@@ -4,6 +4,7 @@ import Logo from "../components/Logo";
 import { COLORS } from "../enums";
 import TabView from "../components/TabView";
 import Login from "../components/Login";
+import Register from "../components/Register";
 
 const AuthHeader = () => {
   return (
@@ -22,7 +23,7 @@ const AuthBody = () => {
       <TabView tabs={["Login", "Register"]}>
         <Login />
         <View>
-          <Text>Register</Text>
+          <Register />
         </View>
       </TabView>
     </View>

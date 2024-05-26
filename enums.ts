@@ -18,11 +18,15 @@ export enum COLORS {
 }
 
 export enum ICONS {
-  email = "mail-outline",
+  userName = "person-outline",
   password = "lock-closed-outline",
   user = "person-outline",
+  email = "mail-outline",
+  dateOfBirth = "calendar-outline",
 }
 
 export enum URL_REQUEST {
   URL_BASE = "https://youconnect-production.up.railway.app/",
+  URL_LOGIN = "https://youconnect-production.up.railway.app/auth/login",
+  URL_REGISTER = "https://youconnect-production.up.railway.app/auth/register",
 }
