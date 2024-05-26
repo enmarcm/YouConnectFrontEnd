@@ -14,6 +14,7 @@ export interface ButtonCustomProps {
 
 export interface GradientBackgroundProps {
   children: React.ReactNode;
+  style?: Record<string, unknown>;
   colors?: string[];
   start?: { x: number; y: number };
   end?: { x: number; y: number };

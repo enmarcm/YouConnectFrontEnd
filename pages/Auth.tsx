@@ -32,7 +32,7 @@ const AuthBody = () => {
 
 const Auth = () => {
   return (
-    <GradientBackground>
+    <GradientBackground style={styles.gradiant}>
       <View style={styles.container}>
         <AuthHeader />
         <AuthBody />
@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  gradiant:{
+    flex: 1,
   },
   logoContainer: {
     marginRight: 20,

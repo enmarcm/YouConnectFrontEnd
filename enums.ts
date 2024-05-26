@@ -2,6 +2,7 @@ export enum ROUTES {
   START = "/",
   AUTH = "/auth",
   HOME = "/home",
+  CONTACTS = "/contacts",
   PROFILE = "/profile",
   SETTINGS = "/settings",
   NOT_FOUND = "*",
@@ -23,6 +24,7 @@ export enum ICONS {
   user = "person-outline",
   email = "mail-outline",
   dateOfBirth = "calendar-outline",
+  contact = "search-outline",
 }
 
 export enum URL_REQUEST {
