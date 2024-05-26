@@ -1,7 +1,5 @@
 import { FetchoParams } from "../types";
 
-
-
 const fetcho = async ({
   url,
   method = "GET",
