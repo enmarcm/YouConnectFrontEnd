@@ -4,10 +4,10 @@ import { FetchoParams } from "../types";
 import fetcho from "../utils/fetcho";
 
 const useFetcho = () => {
-  const { setIsLoading } = useContext(LoadingContext);
+  // const { setIsLoading } = useContext(LoadingContext);
 
   const fetchWithLoading = async (params: FetchoParams) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     console.log(params);
     const data = await fetcho(params).catch((error) => {
       console.error(
@@ -15,7 +15,7 @@ const useFetcho = () => {
       );
       return false;
     });
-    setIsLoading(false);
+    // setIsLoading(false);
     return data;
   };
 

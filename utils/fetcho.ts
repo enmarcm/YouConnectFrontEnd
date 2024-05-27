@@ -5,16 +5,17 @@ const fetcho = async ({
   method = "GET",
   body,
   isCors = false,
+  config,
 }: FetchoParams): Promise<Record<string, unknown> | false> => {
   try {
-    const config: any = {
-      method,
-      credentials: "include",
-      cors: isCors ? "cors" : "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    // const config: any = {
+    //   method,
+    //   credentials: "include",
+    //   cors: isCors ? "cors" : "no-cors",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
 
     if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {
       config.body = JSON.stringify(body);
