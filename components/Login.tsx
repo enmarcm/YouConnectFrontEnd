@@ -1,18 +1,18 @@
 import React from "react";
-import { Alert, View } from "react-native"
+import { Alert, View } from "react-native";
 import { Formik } from "formik";
 import ButtonCustom from "./ButtonCustom";
 import FormikInputValue from "./FormikInputValue";
 import { loginValidationSchema } from "../schemas/login";
 import useFetcho from "../customHooks/useFetcho";
 import { URL_REQUEST, ROUTES } from "../enums";
-import {
-  useAsyncStorage,
-} from "@react-native-async-storage/async-storage";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import { useNavigate, useNavigation } from "react-router-native";
 
 const Login = () => {
   const fetchWithLoading = useFetcho();
   const { setItem } = useAsyncStorage("UserLogged");
+  const navigation = useNavigate();
 
   const initialValues = {
     userName: "",
@@ -27,10 +27,16 @@ const Login = () => {
         body: values,
       });
 
-      await setItem(JSON.stringify(data));
+      const { token, message } = data as any;
 
-      Alert.alert("Values", JSON.stringify(values));
-      Alert.alert("Data", JSON.stringify(data));
+      if (token) {
+        await setItem(JSON.stringify(token));
+        navigation(ROUTES.HOME);
+        return;
+      } else {
+        Alert.alert("Error", JSON.stringify(message));
+        return;
+      }
     } catch (error) {
       console.error(error);
       Alert.alert("Error", error.message);
