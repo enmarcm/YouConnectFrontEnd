@@ -45,6 +45,7 @@ export interface FetchoParams {
   method?: HttpMethod;
   body?: Record<string, unknown>;
   isCors?: boolean;
+  config?: Record<string, unknown>;
 }
 
 export interface PropsChildren {
