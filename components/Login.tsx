@@ -12,11 +12,21 @@ import { useNavigate, useNavigation } from "react-router-native";
 const Login = () => {
   const fetchWithLoading = useFetcho();
   const { setItem } = useAsyncStorage("UserLogged");
+  const { getItem } = useAsyncStorage("UserLogged");
   const navigation = useNavigate();
 
   const initialValues = {
     userName: "",
     password: "",
+  };
+
+  const config: any = {
+    method: "POST",
+    credentials: "include",
+    cors: false ? "cors" : "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
 
   const handleSubmitFunction = async (values: any) => {
@@ -25,6 +35,7 @@ const Login = () => {
         url: URL_REQUEST.URL_LOGIN,
         method: "POST",
         body: values,
+        config: config,
       });
 
       const { token, message } = data as any;
@@ -32,6 +43,7 @@ const Login = () => {
       if (token) {
         await setItem(JSON.stringify(token));
         navigation(ROUTES.HOME);
+
         return;
       } else {
         Alert.alert("Error", JSON.stringify(message));
