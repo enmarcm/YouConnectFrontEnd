@@ -10,7 +10,7 @@ import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useNavigate } from "react-router-native";
 
 const Login = () => {
-  const {fetchWithLoading, setIsLoading} = useFetcho();
+  const fetchWithLoading = useFetcho();
   const { setItem } = useAsyncStorage("UserLogged");
   const navigation = useNavigate();
 
@@ -30,7 +30,6 @@ const Login = () => {
 
   const handleSubmitFunction = async (values: any) => {
     try {
-      setIsLoading(true);
       const data = await fetchWithLoading({
         url: URL_REQUEST.URL_LOGIN,
         method: "POST",
@@ -52,9 +51,7 @@ const Login = () => {
     } catch (error) {
       console.error(error);
       Alert.alert("Error", error.message);
-    }finally{
-      setIsLoading(false)
-    }
+    } 
   };
 
   return (
