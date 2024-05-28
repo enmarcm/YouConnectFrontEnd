@@ -30,8 +30,8 @@ export enum ICONS {
 }
 
 export enum URL_REQUEST {
-  URL_BASE = "https://youconnect-production.up.railway.app/",
-  URL_LOGIN = "https://youconnect-production.up.railway.app/auth/login",
-  URL_REGISTER = "https://youconnect-production.up.railway.app/auth/register",
-  URL_CONTACTS = "https://youconnect-production.up.railway.app/contact/all",
+  URL_BASE = "https://efficient-adaptation-production.up.railway.app/",
+  URL_LOGIN = "https://efficient-adaptation-production.up.railway.app/auth/login",
+  URL_REGISTER = "https://efficient-adaptation-production.up.railway.app/auth/register",
+  URL_CONTACTS = "https://efficient-adaptation-production.up.railway.app/contact/all",
 }

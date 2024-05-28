@@ -67,3 +67,12 @@ export interface TabViewProps {
   tabs: Tab[];
   children: React.ReactNode[];
 }
+
+export interface ContactItemProps {
+  contact: {
+    id: string;
+    name: string;
+    number: string[];
+    image: string;
+  };
+}

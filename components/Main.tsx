@@ -18,15 +18,12 @@ const Main = () => {
   return (
     <View style={viewStyle}>
       <StatusBar style="dark" />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Routes>
-          <Route path={ROUTES.START} element={<Start />} />
-          <Route path={ROUTES.AUTH} element={<Auth />} />
-          <Route path={ROUTES.HOME} element={<Home />}></Route>
-        </Routes>
-      )}
+      <Routes>
+        <Route path={ROUTES.START} element={<Start />} />
+        <Route path={ROUTES.AUTH} element={<Auth />} />
+        <Route path={ROUTES.HOME} element={<Home />}></Route>
+      </Routes>
+      {isLoading && <Loader />}
     </View>
   );
 };

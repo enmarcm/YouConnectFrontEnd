@@ -1,84 +1,69 @@
-import React, {useEffect, useState} from "react";
-import {View, Text, StyleSheet, FlatList} from "react-native";
-import useFetcho from "../customHooks/useFetcho";
-import { URL_REQUEST } from "../enums";
-import { useCallback } from "react";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import React from "react";
+import { View, SectionList, Text, StyleSheet } from "react-native";
+import { ContactItemProps } from "../types";
+import ContactItem from "./ContactItem";
+import getItemLayout from "react-native-section-list-get-item-layout";
+import useContacts from "../customHooks/useContacts";
 
-const ContactsView =  (contacts: any) => {
-    const { getItem } = useAsyncStorage("UserLogged");
-    const fetchWithLoading = useFetcho();
+const ContactsView = () => {
+  const contacts = useContacts();
 
-    const contactView = [{
-        id: 1,
-        name: "John Doe",
-        phoneNumber: "1234567890"
-    }];
+  const contactsGroupedByLetter = contacts.reduce(
+    (groupedContacts: any, contact: any) => {
+      const firstLetter = contact.name[0].toUpperCase();
+      if (!groupedContacts[firstLetter]) {
+        groupedContacts[firstLetter] = [];
+      }
+      groupedContacts[firstLetter].push(contact);
+      return groupedContacts;
+    },
+    {}
+  );
 
-    const config: any = {
-        method: "GET",
-        credentials: "include",
-        cors: false ? "cors" : "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": {},
-        },
-      };
+  // Convierte el objeto en un array de secciones para SectionList
+  const sections = Object.keys(contactsGroupedByLetter)
+    .sort()
+    .map((letter) => ({
+      title: letter,
+      data: contactsGroupedByLetter[letter],
+    }));
 
-        const fetchAllContacts = async () => {
-          let token = await getItem();
-        //   console.log(typeof token);
-          if (typeof token === 'string') {
-            token = token.split("Bearer ")[1].split('"')[0];
-            // console.log(token);
-            config.headers.Authorization = "Bearer " + token;;
-          }
-      
-          try {
-            const data = await fetchWithLoading({
-              url: URL_REQUEST.URL_CONTACTS,
-              config: config,
-            });
-            // console.log(data);
-            console.log(data);
-            return data;
-          } catch (error) {
-            console.error(error);
-          }
-        };
+  const renderSectionHeader = ({ section: { title } }) => (
+    <Text style={styles.sectionHeader}>{title}</Text>
+  );
 
-        // const contact = fetchAllContacts();
-        // console.log(contact);
-        useEffect(() => {
-            fetchAllContacts()
-    
-            });
+  const renderItem = ({ item }) => <ContactItem contact={item} />;
 
-    return (
-        <View style={styles.container}>
-            <FlatList
-                data={contactView}
-                keyExtractor={item => item.id.toString()}
-                renderItem={({ item }) => (
-                    <View>
-                        <Text style={styles.item}>{item.name}</Text>
-                        <Text>{item.phoneNumber}</Text>
-                    </View>
-                )}
-            />
-        </View>
-    )
-}
+  return (
+    <View style={styles.container}>
+      <SectionList
+        sections={sections}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
+        getItemLayout={getItemLayout({
+          getItemHeight: () => 30, 
+          getSectionHeaderHeight: () => 15,
+        })}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: 22,
-    },
-    item: {
-      padding: 10,
-      fontSize: 18,
-      height: 44,
-    },
-  });
+  container: {
+    flex: 1,
+    marginBottom: 20
+  },
+  sectionHeader: {
+    fontWeight: "bold",
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingTop: 1,
+    paddingBottom: 1,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 10
+  },
+});
+
 export default ContactsView;

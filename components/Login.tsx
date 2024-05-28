@@ -7,12 +7,11 @@ import { loginValidationSchema } from "../schemas/login";
 import useFetcho from "../customHooks/useFetcho";
 import { URL_REQUEST, ROUTES } from "../enums";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { useNavigate, useNavigation } from "react-router-native";
+import { useNavigate } from "react-router-native";
 
 const Login = () => {
-  const fetchWithLoading = useFetcho();
+  const {fetchWithLoading, setIsLoading} = useFetcho();
   const { setItem } = useAsyncStorage("UserLogged");
-  const { getItem } = useAsyncStorage("UserLogged");
   const navigation = useNavigate();
 
   const initialValues = {
@@ -31,6 +30,7 @@ const Login = () => {
 
   const handleSubmitFunction = async (values: any) => {
     try {
+      setIsLoading(true);
       const data = await fetchWithLoading({
         url: URL_REQUEST.URL_LOGIN,
         method: "POST",
@@ -52,6 +52,8 @@ const Login = () => {
     } catch (error) {
       console.error(error);
       Alert.alert("Error", error.message);
+    }finally{
+      setIsLoading(false)
     }
   };
 
