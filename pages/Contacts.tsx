@@ -16,7 +16,7 @@ const Contacts = () => {
     <View style={styles.container}>
       <GradientBackground style={styles.body}>
         <Formik initialValues={initialValues} onSubmit={handleSubmitFunction}>
-          {({  }) => {
+          {({}) => {
             return (
               <View>
                 <FormikInputValue
@@ -35,7 +35,6 @@ const Contacts = () => {
 };
 
 const styles = StyleSheet.create({
-
   logoContainer: {
     marginRight: 20,
   },
