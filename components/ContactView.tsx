@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, SectionList, Text, StyleSheet } from "react-native";
 import { ContactItemProps } from "../types";
 import ContactItem from "./ContactItem";
@@ -7,6 +7,14 @@ import useContacts from "../customHooks/useContacts";
 
 const ContactsView = () => {
   const contacts = useContacts();
+
+  if (!Array.isArray(contacts) || contacts.length === 0) {
+    return (
+      <View style={{ padding: 16, alignItems: "center" }}>
+        <Text style={{ fontSize: 20, fontWeight: 600 }}>No contacts!</Text>
+      </View>
+    );
+  }
 
   const contactsGroupedByLetter = contacts.reduce(
     (groupedContacts: any, contact: any) => {
@@ -20,7 +28,6 @@ const ContactsView = () => {
     {}
   );
 
-  // Convierte el objeto en un array de secciones para SectionList
   const sections = Object.keys(contactsGroupedByLetter)
     .sort()
     .map((letter) => ({
@@ -42,7 +49,7 @@ const ContactsView = () => {
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         getItemLayout={getItemLayout({
-          getItemHeight: () => 30, 
+          getItemHeight: () => 30,
           getSectionHeaderHeight: () => 15,
         })}
       />
@@ -53,7 +60,7 @@ const ContactsView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 20
+    marginBottom: 20,
   },
   sectionHeader: {
     fontWeight: "bold",
@@ -62,7 +69,7 @@ const styles = StyleSheet.create({
     paddingTop: 1,
     paddingBottom: 1,
     backgroundColor: "#f0f0f0",
-    borderRadius: 10
+    borderRadius: 10,
   },
 });
 
