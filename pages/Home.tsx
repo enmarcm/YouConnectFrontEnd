@@ -4,6 +4,8 @@ import TabView from "../components/TabView";
 import { COLORS, ICONS } from "../enums";
 import Contacts from "./Contacts";
 import AppBarCustom from "../components/AppBarCustom";
+import Groups from "../components/Groups";
+import ContactGroups from "../components/ContactGroups";
 
 const Home = () => {
   return (
@@ -11,7 +13,7 @@ const Home = () => {
       <AppBarCustom tabs={["Contacts", "Groups", "Settings"]}>
         <Contacts />
         <View>
-          <Text>Group</Text>
+            <ContactGroups />
         </View>
         <View>
           <Text>Settings</Text>

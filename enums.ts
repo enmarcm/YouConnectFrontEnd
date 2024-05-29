@@ -33,5 +33,7 @@ export enum URL_REQUEST {
   URL_BASE = "https://efficient-adaptation-production.up.railway.app/",
   URL_LOGIN = "https://efficient-adaptation-production.up.railway.app/auth/login",
   URL_REGISTER = "https://efficient-adaptation-production.up.railway.app/auth/register",
-  URL_CONTACTS = "https://efficient-adaptation-production.up.railway.app/contact/all",
+  URL_CONTACTS = "https://efficient-adaptation-production.up.railway.app/contact/allByUser",
+  URL_GROUPS = "https://efficient-adaptation-production.up.railway.app/group/view/allByUser",
+  URL_CONTACT_GROUPS = "https://efficient-adaptation-production.up.railway.app/group/view/allByGroup",
 }

@@ -15,6 +15,14 @@ const Register = () => {
         email: "",
         dateOfBirth: "",
     }
+    const config: any = {
+        method: "POST",
+        credentials: "include",
+        cors: false ? "cors" : "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
     const handleSubmitFunction = async (values: any, {resetForm}) => {
         console.log(values)
@@ -22,6 +30,7 @@ const Register = () => {
             url: URL_REQUEST.URL_REGISTER,
             method: "POST",
             body: values,
+            config: config
         });
 
         Alert.alert("Values", JSON.stringify(values));

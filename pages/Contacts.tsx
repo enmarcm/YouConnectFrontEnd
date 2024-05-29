@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
   body: {
     flex: 0.1,
     backgroundColor: COLORS.WHITE,
-    // borderBottomLeftRadius: 30,
-    // borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
