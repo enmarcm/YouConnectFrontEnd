@@ -6,6 +6,7 @@ import Contacts from "./Contacts";
 import AppBarCustom from "../components/AppBarCustom";
 import Groups from "../components/Groups";
 import ContactGroups from "../components/ContactGroups";
+import AddContact from "../components/AddContact";
 
 const Home = () => {
   return (
@@ -17,6 +18,9 @@ const Home = () => {
         </View>
         <View>
           <Text>Settings</Text>
+        </View>
+        <View>
+          <AddContact />
         </View>
       </AppBarCustom>
     </View>

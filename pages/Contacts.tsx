@@ -5,12 +5,16 @@ import { COLORS } from "../enums";
 import FormikInputValue from "../components/FormikInputValue";
 import { Formik } from "formik";
 import ContactsView from "../components/ContactView";
+import { useNavigate } from "react-router-native";
+import { FAB } from "react-native-paper";
 
 const Contacts = () => {
   const initialValues = {
     contact: "",
   };
+  const navigate = useNavigate()
   const handleSubmitFunction = async (values: any, { resetForm }) => {};
+  const handleAddContact = () => navigate("/addContact");
 
   return (
     <View style={styles.container}>
@@ -30,6 +34,7 @@ const Contacts = () => {
         </Formik>
       </GradientBackground>
       <ContactsView />
+      <FAB style={styles.fab} icon="plus" onPress={handleAddContact} />
     </View>
   );
 };
@@ -60,6 +65,12 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
 });
 

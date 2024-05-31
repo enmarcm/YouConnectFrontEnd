@@ -10,6 +10,7 @@ import Auth from "../pages/Auth";
 import Loader from "./Loader";
 import { LoadingContext } from "../context/LoadingContext";
 import Home from "../pages/Home";
+import AddContact from "./AddContact";
 
 const Main = () => {
   useBackButtonHandler();
@@ -22,6 +23,7 @@ const Main = () => {
         <Route path={ROUTES.START} element={<Start />} />
         <Route path={ROUTES.AUTH} element={<Auth />} />
         <Route path={ROUTES.HOME} element={<Home />}></Route>
+        <Route path={ROUTES.ADDCONTACT} element={<AddContact />} />
       </Routes>
       {isLoading && <Loader />}
     </View>
