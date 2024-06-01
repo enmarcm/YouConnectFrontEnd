@@ -15,51 +15,46 @@ import useContactGroups from "../customHooks/useContactGroups";
 const ContactGroups = () => {
     const contactGroups = useContactGroups();
   
-    const renderContact = ({ item }) => (
-      <View style={styles.contact}>
-        <Text>{item.name}</Text>
-      </View>
+    const renderItem = ({ item }) => (
+      <ContactItem contact={item} />
     );
   
-    const renderGroup = ({ item }) => (
-      <View style={styles.group}>
-        <Text style={styles.groupTitle}>{item.nameGroup}</Text>
-        <FlatList
-          data={item.contacts}
-          renderItem={renderContact}
-          keyExtractor={(contact) => contact.id}
-        />
-      </View>
+    const renderSectionHeader = ({ section: { title } }) => (
+      <Text style={styles.sectionHeader}>{title}</Text>
     );
   
     return (
-    
-        <FlatList
-          data={contactGroups}
-          renderItem={renderGroup}
-          keyExtractor={(group) => group.idGroup}
+      <View>
+        <SectionList
+          sections={contactGroups.map(group => ({ title: group.nameGroup, data: group.contacts }))}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          renderSectionHeader={renderSectionHeader}
         />
+      </View>
     );
   };
   
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 10,
-    },
-    group: {
-      marginBottom: 20,
-    },
-    groupTitle: {
-      fontSize: 18,
-      fontWeight: 'bold',
-    },
-    contact: {
-      backgroundColor: '#f0f0f0',
-      borderRadius: 10,
-      padding: 10,
-      marginBottom: 10,
-    },
-  });
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  sectionHeader: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingTop: 1,
+    paddingBottom: 1,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+  },
+  item: {
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+  },
+});
   
   export default ContactGroups;
