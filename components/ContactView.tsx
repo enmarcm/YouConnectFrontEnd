@@ -7,6 +7,7 @@ import useContacts from "../customHooks/useContacts";
 
 const ContactsView = () => {
   const contacts = useContacts();
+  console.log(contacts);
 
   if (!Array.isArray(contacts) || contacts.length === 0) {
     return (

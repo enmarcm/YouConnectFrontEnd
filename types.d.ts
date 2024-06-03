@@ -74,5 +74,13 @@ export interface ContactItemProps {
     name: string;
     number: string[];
     image: string;
-  };
-}
+    }
+  }
+  export interface GroupItemProps {
+    group: {
+      id: string;
+      name: string;
+      description: string;
+      idUser: string;
+    }
+  }
