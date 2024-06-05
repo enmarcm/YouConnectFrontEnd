@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import TabView from "../components/TabView";
-import { COLORS, ICONS } from "../enums";
+import { COLORS } from "../enums";
 import Contacts from "./Contacts";
 import AppBarCustom from "../components/AppBarCustom";
 import AddContact from "../components/AddContact";

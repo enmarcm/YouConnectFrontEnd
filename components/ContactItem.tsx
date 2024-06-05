@@ -4,6 +4,7 @@ import { ContactItemProps } from "../types";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigate } from "react-router-native";
 import { useCommunication } from "../customHooks/useCommunication";
+import TextTicker from 'react-native-text-ticker';
 
 const ContactItem: FC<ContactItemProps> = ({ contact }) => {
   const navigate = useNavigate();
@@ -18,7 +19,16 @@ const ContactItem: FC<ContactItemProps> = ({ contact }) => {
     <TouchableOpacity onPress={handlePress} style={styles.container}>
       <Image source={{ uri: contact.image }} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text style={styles.name}>{contact.name}</Text>
+        <TextTicker
+          style={styles.name}
+          duration={3000}
+          loop
+          bounce
+          repeatSpacer={50}
+          marqueeDelay={1000}
+        >
+          {contact.name}
+        </TextTicker>
         <Text style={styles.number}>{contact.number[0]}</Text>
       </View>
       <View style={styles.iconContainer}>

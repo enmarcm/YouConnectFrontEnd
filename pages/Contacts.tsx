@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import GradientBackground from "../components/GradientBackground";
 import { COLORS } from "../enums";
 import FormikInputValue from "../components/FormikInputValue";
@@ -13,7 +13,7 @@ const Contacts = () => {
     contact: "",
   };
   const navigate = useNavigate()
-  const handleSubmitFunction = async (values: any, { resetForm }) => {};
+  const handleSubmitFunction = async (_values: any) => {};
   const handleAddContact = () => navigate("/addContact");
 
   return (

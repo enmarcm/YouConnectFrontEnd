@@ -4,9 +4,10 @@ import { Formik } from "formik";
 import ButtonCustom from "./ButtonCustom";
 import FormikInputValue from "./FormikInputValue";
 import useFetcho from "../customHooks/useFetcho";
-import { URL_REQUEST } from "../enums";
+import { ROUTES, URL_REQUEST } from "../enums";
 import { registerValidationSchema } from "../schemas/register";
 import { useToast } from "../customHooks/useToast";
+import { useNavigate } from "react-router-native";
 
 const Register = () => {
   const { showToast } = useToast();
@@ -17,6 +18,8 @@ const Register = () => {
     email: "",
     dateOfBirth: "",
   };
+  const navigate = useNavigate()
+
   const config: any = {
     method: "POST",
     credentials: "include",
@@ -36,7 +39,9 @@ const Register = () => {
 
     data?.error
       ? showToast(data.error, "error")
-      : showToast("Register", "success");
+      : showToast(data.message, "success");
+
+      navigate(ROUTES.AUTH)
   };
 
   return (
