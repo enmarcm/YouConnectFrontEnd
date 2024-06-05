@@ -4,7 +4,6 @@ import { COLORS } from "../enums";
 import useTab from "../customHooks/useTabs";
 import { TabViewProps } from "../types";
 
-// Styles
 const stylesFunct = (location: "top" | "bottom") =>
   StyleSheet.create({
     container: {

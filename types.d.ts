@@ -74,13 +74,24 @@ export interface ContactItemProps {
     name: string;
     number: string[];
     image: string;
-    }
-  }
-  export interface GroupItemProps {
-    group: {
-      id: string;
-      name: string;
-      description: string;
-      idUser: string;
-    }
-  }
+  };
+}
+export interface GroupItemProps {
+  group: {
+    id: string;
+    name: string;
+    description: string;
+    idUser: string;
+  };
+}
+
+export type ToastContextType = {
+  toastData: {
+    isVisible: boolean;
+    message: string;
+    type: string;
+  };
+  toggleToast: () => void;
+  showToast: (message: string, type: string) => void;
+  hideToast: () => void;
+};

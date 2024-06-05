@@ -13,6 +13,7 @@ import Home from "../pages/Home";
 import AddContact from "./AddContact";
 import ContactPage from "./ContactPage";
 import GroupPage from "./GroupPage";
+import ToastWrapper from "./ToastWrapper";
 
 const Main = () => {
   useBackButtonHandler();
@@ -30,6 +31,7 @@ const Main = () => {
         <Route path="groups/view/:id" element = {<GroupPage/>} />
       </Routes>
       {isLoading && <Loader />}
+      <ToastWrapper/>
     </View>
   );
 };

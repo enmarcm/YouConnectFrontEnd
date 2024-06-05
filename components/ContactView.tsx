@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
 import { View, SectionList, Text, StyleSheet } from "react-native";
-import { ContactItemProps } from "../types";
 import ContactItem from "./ContactItem";
 import getItemLayout from "react-native-section-list-get-item-layout";
 import useContacts from "../customHooks/useContacts";
 
 const ContactsView = () => {
   const contacts = useContacts();
-  console.log(contacts);
 
   if (!Array.isArray(contacts) || contacts.length === 0) {
     return (

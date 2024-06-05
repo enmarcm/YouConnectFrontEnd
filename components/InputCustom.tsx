@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   TextInput,
   View,
@@ -8,25 +8,73 @@ import {
   Animated,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { ICONS } from "../enums";
 import useInputStyles from "../customHooks/useInputsStyles";
 import useFocusAnimation from "../customHooks/useFocusAnimation";
 
-const InputCustom = ({ style = {}, type = "text", error, ...props }) => {
+const InputCustom = ({
+  style = {},
+  type = "text",
+  error,
+  onChangeText,
+  ...props
+}) => {
   const { secureTextEntry, handleEyePress, inputStyle, containerStyle } =
     useInputStyles({ type, style, error, styles });
 
   const translateY = useFocusAnimation(props.focus);
 
+  const [date, setDate] = useState(null);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date: any) => {
+    setDate(date);
+    hideDatePicker();
+    if (onChangeText) onChangeText(date.toISOString());
+    return;
+  };
+
   return (
-    <Animated.View style={[ { transform: [{ translateY }] }]}>
+    <Animated.View style={[{ transform: [{ translateY }] }]}>
       <View style={containerStyle}>
         {type in ICONS && <Icon name={ICONS[type]} size={20} />}
-        <TextInput
-          style={inputStyle}
-          secureTextEntry={secureTextEntry}
-          {...props}
-        />
+        {type === "date" ? (
+          <TouchableOpacity
+            onPress={showDatePicker}
+            style={{ flexDirection: "row", alignItems: "center" }}
+          >
+            <Icon
+              name="calendar-outline"
+              size={20}
+              style={{ marginRight: 10 }}
+            />
+            <Text style={{ color: "gray" }}>
+              {date ? date.toLocaleDateString() : "MM/DD/YYYY"}
+            </Text>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TextInput
+            style={inputStyle}
+            secureTextEntry={secureTextEntry}
+            onChangeText={onChangeText}
+            {...props}
+          />
+        )}
         {type === "password" && (
           <TouchableOpacity onPress={handleEyePress}>
             <Icon
@@ -65,7 +113,7 @@ const styles = StyleSheet.create({
     color: "red",
     marginTop: -5,
     marginLeft: 10,
-  }
+  },
 });
 
 export default InputCustom;

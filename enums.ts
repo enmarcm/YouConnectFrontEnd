@@ -30,13 +30,15 @@ export enum ICONS {
   Groups = "people-outline",
 }
 
+// const URL_BASE = "https://efficient-adaptation-production.up.railway.app/";
+const URL_BASE = "http://192.168.3.106:7878"
+
 export enum URL_REQUEST {
-  URL_BASE = "https://efficient-adaptation-production.up.railway.app/",
-  URL_LOGIN = "https://efficient-adaptation-production.up.railway.app/auth/login",
-  URL_REGISTER = "https://efficient-adaptation-production.up.railway.app/auth/register",
-  URL_CONTACTS = "https://efficient-adaptation-production.up.railway.app/contact/allByUser",
-  URL_GROUPS = "https://efficient-adaptation-production.up.railway.app/group/view/allByUser",
-  URL_CONTACT_GROUPS = "https://efficient-adaptation-production.up.railway.app/group/view/allByGroup/",
-  URL_ADD_CONTACT = "https://efficient-adaptation-production.up.railway.app/contact/create",
-  URL_VIEW_CONTACT = "https://efficient-adaptation-production.up.railway.app/contact/"
+  URL_LOGIN = `${URL_BASE}/auth/login`,
+  URL_REGISTER = `${URL_BASE}/auth/register`,
+  URL_CONTACTS = `${URL_BASE}/contact/allByUser`,
+  URL_GROUPS = `${URL_BASE}/group/view/allByUser`,
+  URL_CONTACT_GROUPS = `${URL_BASE}/group/view/allByGroup`,
+  URL_ADD_CONTACT = `${URL_BASE}/contact/create`,
+  URL_VIEW_CONTACT = `${URL_BASE}/contact/`,
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, View } from "react-native";
+import { View } from "react-native";
 import { Formik } from "formik";
 import ButtonCustom from "./ButtonCustom";
 import FormikInputValue from "./FormikInputValue";
@@ -8,11 +8,13 @@ import useFetcho from "../customHooks/useFetcho";
 import { URL_REQUEST, ROUTES } from "../enums";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useNavigate } from "react-router-native";
+import { useToast } from "../customHooks/useToast";
 
 const Login = () => {
   const fetchWithLoading = useFetcho();
   const { setItem } = useAsyncStorage("UserLogged");
   const navigation = useNavigate();
+  const { showToast } = useToast();
 
   const initialValues = {
     userName: "",
@@ -37,21 +39,23 @@ const Login = () => {
         config: config,
       });
 
-      const { token, message } = data as any;
+      const { token, error: errorData } = data as any;
+      const message = errorData ? errorData : "";
 
       if (token) {
         await setItem(JSON.stringify(token));
+        showToast("Login", "success");
         navigation(ROUTES.HOME);
 
         return;
       } else {
-        Alert.alert("Error", JSON.stringify(message));
+        showToast(`Error: ${message}`, "error");
         return;
       }
     } catch (error) {
       console.error(error);
-      Alert.alert("Error", error.message);
-    } 
+      showToast(`Error: ${error}`, "error");
+    }
   };
 
   return (

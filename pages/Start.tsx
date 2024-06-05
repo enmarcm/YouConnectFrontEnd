@@ -12,10 +12,14 @@ const Start = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <ButtonCustom to={ROUTES.AUTH} shadow>Start</ButtonCustom>
+        <ButtonCustom to={ROUTES.AUTH} shadow>
+          Start
+        </ButtonCustom>
       </View>
       <View style={styles.buttonContainer}>
-        <ButtonCustom to={ROUTES.HOME} shadow>Home</ButtonCustom>
+        <ButtonCustom to={ROUTES.HOME} shadow>
+          Home
+        </ButtonCustom>
       </View>
     </View>
   );

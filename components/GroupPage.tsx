@@ -1,17 +1,14 @@
-import React, { FC, useContext } from "react";
+import React, { FC } from "react";
 import { View, SectionList, Text, StyleSheet } from "react-native";
-import { ContactItemProps } from "../types";
 import ContactItem from "./ContactItem";
 import getItemLayout from "react-native-section-list-get-item-layout";
-import useContacts from "../customHooks/useContacts";
-import useGroups from "../customHooks/useGroups";
 import useGroupsPage from "../customHooks/useGroupPage";
 import { useParams } from "react-router-native";
 
 const GroupPage: FC = () => {
-    const {id} = useParams();
-    const contacts = useGroupsPage({id});
-    console.log(contacts);
+  const { id } = useParams();
+  const contacts = useGroupsPage({ id });
+  console.log(contacts);
 
   if (!Array.isArray(contacts) || contacts.length === 0) {
     return (
