@@ -11,7 +11,7 @@ const ContactItem: FC<ContactItemProps> = ({ contact }) => {
   const { handleCallPress, handleSmsPress } = useCommunication();
 
   const handlePress = () => {
-    navigate(`/contact/get/${contact.id}`);
+    navigate(`contacts/${contact.id}`);
   };
 
   return (

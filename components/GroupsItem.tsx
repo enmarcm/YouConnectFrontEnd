@@ -16,7 +16,7 @@ const GroupsItem: FC<GroupItemProps> = ({group}) => {
   const navigate = useNavigate();
 
   const handlePress = () => {
-    navigate(`/contact/get/${group.id}`);
+    navigate(`/groups/view/${group.id}`);
   };
 
   return (
