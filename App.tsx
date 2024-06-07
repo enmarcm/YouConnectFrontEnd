@@ -8,7 +8,7 @@ export default function App() {
     <NativeRouter>
       <LoadingProvider>
         <ToastProvider>
-          <Main />
+            <Main />
         </ToastProvider>
       </LoadingProvider>
     </NativeRouter>

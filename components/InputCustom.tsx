@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   Animated,
+  KeyboardTypeOptions,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -18,10 +19,11 @@ const InputCustom = ({
   type = "text",
   error,
   onChangeText,
+  onlyNumber = false, 
   ...props
 }) => {
   const { secureTextEntry, handleEyePress, inputStyle, containerStyle } =
-    useInputStyles({ type, style, error, styles });
+    useInputStyles({ type, style: {}, error, styles });
 
   const translateY = useFocusAnimation(props.focus);
 
@@ -36,15 +38,16 @@ const InputCustom = ({
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date: any) => {
+  const handleConfirm = (date) => {
     setDate(date);
     hideDatePicker();
     if (onChangeText) onChangeText(date.toISOString());
-    return;
   };
 
+  const keyboardType: KeyboardTypeOptions = onlyNumber ? "phone-pad" : "default";
+
   return (
-    <Animated.View style={[{ transform: [{ translateY }] }]}>
+    <Animated.View style={[{ transform: [{ translateY }] }, style]}>
       <View style={containerStyle}>
         {type in ICONS && <Icon name={ICONS[type]} size={20} />}
         {type === "date" ? (
@@ -69,9 +72,10 @@ const InputCustom = ({
           </TouchableOpacity>
         ) : (
           <TextInput
-            style={inputStyle}
+            style={[inputStyle, style]}
             secureTextEntry={secureTextEntry}
             onChangeText={onChangeText}
+            keyboardType={keyboardType} 
             {...props}
           />
         )}

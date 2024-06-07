@@ -4,17 +4,18 @@ import getItemLayout from "react-native-section-list-get-item-layout";
 import useContacts from "../customHooks/useContacts";
 
 const ContactsView = () => {
-  const contacts = useContacts();
+  const { contactView, loading } = useContacts();
 
-  if (!Array.isArray(contacts) || contacts.length === 0) {
+  if (loading) return null;
+
+  if (!Array.isArray(contactView) || contactView.length === 0) {
     return (
       <View style={{ padding: 16, alignItems: "center" }}>
         <Text style={{ fontSize: 20, fontWeight: 600 }}>No contacts!</Text>
       </View>
     );
   }
-
-  const contactsGroupedByLetter = contacts.reduce(
+  const contactsGroupedByLetter = contactView.reduce(
     (groupedContacts: any, contact: any) => {
       const firstLetter = contact.name[0].toUpperCase();
       if (!groupedContacts[firstLetter]) {
@@ -70,5 +71,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-
 export default ContactsView;

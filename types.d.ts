@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface LogoProps {
   color?: string;
   width?: number;
@@ -46,6 +48,7 @@ export interface FetchoParams {
   body?: Record<string, unknown>;
   isCors?: boolean;
   config?: Record<string, unknown>;
+  token?: string;
 }
 
 export interface PropsChildren {
@@ -66,6 +69,13 @@ export interface Tab {
 export interface TabViewProps {
   tabs: Tab[];
   children: React.ReactNode[];
+}
+
+export interface ContactItem{
+  id: string;
+    name: string;
+    number: string[];
+    image: string;
 }
 
 export interface ContactItemProps {
@@ -95,3 +105,26 @@ export type ToastContextType = {
   showToast: (message: string, type: string) => void;
   hideToast: () => void;
 };
+
+export type ContactProviderProps = {
+  children: ReactNode; 
+};
+
+export type ContactsContextType = {
+  contacts: Contact[];
+  addContact: (newContact: Contact) => void;
+  updateContact: (updatedContact: Contact) => void;
+  deleteContact: (contactId: string) => void;
+  setContacts: (contacts: any) => void;
+};
+
+export interface SessionState {
+  isSession: boolean;
+  token: string | null;
+}
+
+export interface AuthContextType {
+  session: SessionState;
+  signIn: (token: string) => void;
+  signOut: () => void;
+}

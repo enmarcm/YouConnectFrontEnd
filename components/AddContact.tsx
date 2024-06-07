@@ -1,21 +1,32 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import useFetcho from "../customHooks/useFetcho";
 import { Formik } from "formik";
 import FormikInputValue from "./FormikInputValue";
 import ButtonCustom from "./ButtonCustom";
-import { URL_REQUEST } from "../enums";
+import { ROUTES, URL_REQUEST } from "../enums";
 import { useToast } from "../customHooks/useToast";
+import addContactSchema from "../schemas/addContact";
+import { useNavigate } from "react-router-native";
+import useContacts from "../customHooks/useContacts";
 
 const AddContact = () => {
   const { getItem } = useAsyncStorage("UserLogged");
   const fetchWithLoading = useFetcho();
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const initialValues = {
     name: "",
-    number: [],
+    number: "",
     email: "",
   };
 
@@ -37,42 +48,74 @@ const AddContact = () => {
     }
 
     try {
-      const data = await fetchWithLoading({
+      if (!values.email) delete values.email;
+
+      const data = (await fetchWithLoading({
         url: URL_REQUEST.URL_ADD_CONTACT,
         method: "POST",
         body: values,
         config: config,
-      });
-      const { message } = data as any;
-      console.log(message);
+      })) as any;
+
+      if (data.error) showToast(data.error, "error");
+
+      showToast("Contact added", "success");
+
+      console.log(data);
     } catch (error) {
       console.error(error);
       showToast("Error adding contact", "error");
+    } finally {
+      navigate(ROUTES.HOME);
     }
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmitFunction}>
-      {({ handleSubmit }) => {
-        return (
-          <View style={styles.container}>
-            <FormikInputValue name="name" type="name" placeholder="Name" />
-            <FormikInputValue
-              name="number"
-              type="number"
-              placeholder="Number"
-            />
-            <FormikInputValue name="email" type="email" placeholder="Email" />
-            <ButtonCustom onPress={handleSubmit}>Add</ButtonCustom>
-          </View>
-        );
-      }}
-    </Formik>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: "https://via.placeholder.com/150" }}
+            style={styles.profileImage}
+          />
+        </View>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmitFunction}
+          validationSchema={addContactSchema}
+        >
+          {({ handleSubmit }) => (
+            <>
+              <FormikInputValue name="name" type="name" placeholder="Name" />
+              <FormikInputValue
+                name="number"
+                type="string"
+                placeholder="+584261231234"
+                multiple
+                onlyNumber
+              />
+              <FormikInputValue name="email" type="email" placeholder="Email" />
+              <ButtonCustom onPress={handleSubmit}>Add</ButtonCustom>
+            </>
+          )}
+        </Formik>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    justifyContent: "center",
+    padding: 30,
+    gap: 10,
+    flexGrow: 1,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -83,15 +126,26 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#ddd",
-    justifyContent: "flex-start", // Centra el contenido en la parte superior
-    alignItems: "center", // Centra el contenido horizontalmente
+    justifyContent: "center",
+    alignItems: "center",
   },
   text: {
     fontSize: 18,
     color: "#333",
-    textAlign: "center", // Centra el texto horizontalmente
+    textAlign: "center",
   },
-  // ...
+  imageContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  profileImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+  },
+  flexContainer: {
+    flex: 1,
+  },
 });
 
 export default AddContact;

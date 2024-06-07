@@ -5,7 +5,7 @@ import fetcho from "../utils/fetcho";
 import { ToastContext } from "../context/ToastContext";
 
 const useFetcho = () => {
-  const { setIsLoading, isLoading } = useContext(LoadingContext);
+  const { setIsLoading } = useContext(LoadingContext);
   const { showToast } = useContext(ToastContext);
 
   const fetchWithLoading = async (params: FetchoParams) => {

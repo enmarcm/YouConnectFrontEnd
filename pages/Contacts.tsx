@@ -12,7 +12,7 @@ const Contacts = () => {
   const initialValues = {
     contact: "",
   };
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmitFunction = async (_values: any) => {};
   const handleAddContact = () => navigate("/addContact");
 
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     margin: 16,
     right: 0,
-    bottom: 0,
+    bottom: 16,
+    backgroundColor: "#9bfabc",
   },
 });
 
