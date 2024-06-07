@@ -41,4 +41,5 @@ export enum URL_REQUEST {
   URL_CONTACT_GROUPS = `${URL_BASE}/group/view/allByGroup`,
   URL_ADD_CONTACT = `${URL_BASE}/contact/create`,
   URL_VIEW_CONTACT = `${URL_BASE}/contact/`,
+  URL_ADD_GROUP = `${URL_BASE}/group/create`,
 }

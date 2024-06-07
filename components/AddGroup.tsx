@@ -14,11 +14,11 @@ import FormikInputValue from "./FormikInputValue";
 import ButtonCustom from "./ButtonCustom";
 import { ROUTES, URL_REQUEST } from "../enums";
 import { useToast } from "../customHooks/useToast";
-import addContactSchema from "../schemas/addContact";
+// import addContactSchema from "../schemas/addContact";
 import { useNavigate } from "react-router-native";
 // import useContacts from "../customHooks/useContacts";
 
-const AddContact = () => {
+const AddGroup = () => {
   const { getItem } = useAsyncStorage("UserLogged");
   const fetchWithLoading = useFetcho();
   const { showToast } = useToast();
@@ -26,8 +26,8 @@ const AddContact = () => {
 
   const initialValues = {
     name: "",
-    number: "",
-    email: "",
+    description: "",
+    // maxContacts: 100,
   };
 
   const config: any = {
@@ -51,7 +51,7 @@ const AddContact = () => {
       if (!values.email) delete values.email;
 
       const data = (await fetchWithLoading({
-        url: URL_REQUEST.URL_ADD_CONTACT,
+        url: URL_REQUEST.URL_ADD_GROUP,
         method: "POST",
         body: values,
         config: config,
@@ -89,19 +89,18 @@ const AddContact = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmitFunction}
-          validationSchema={addContactSchema}
+        //   validationSchema={addContactSchema}
         >
           {({ handleSubmit }) => (
             <>
               <FormikInputValue name="name" type="name" placeholder="Name" />
               <FormikInputValue
-                name="number"
-                type="string"
-                placeholder="+584261231234"
-                multiple
+                name="maxContacts"
+                type="number"
+                placeholder="100"
                 onlyNumber
               />
-              <FormikInputValue name="email" type="email" placeholder="Email" />
+              <FormikInputValue name="description" type="email" placeholder="Description" />
               <ButtonCustom onPress={handleSubmit}>Add</ButtonCustom>
             </>
           )}
@@ -149,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddContact;
+export default AddGroup;
