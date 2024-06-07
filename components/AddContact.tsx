@@ -57,11 +57,12 @@ const AddContact = () => {
         config: config,
       })) as any;
 
-      if (data.error) showToast(data.error, "error");
+      if (data.error) {
+        return showToast(data.error, "error");
+      }
 
       showToast("Contact added", "success");
 
-      console.log(data);
     } catch (error) {
       console.error(error);
       showToast("Error adding contact", "error");

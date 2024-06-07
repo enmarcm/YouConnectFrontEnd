@@ -10,11 +10,26 @@ const ContactsView = () => {
 
   if (!Array.isArray(contactView) || contactView.length === 0) {
     return (
-      <View style={{ padding: 16, alignItems: "center" }}>
-        <Text style={{ fontSize: 20, fontWeight: 600 }}>No contacts!</Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 16,
+        }}
+      >
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 8 }}>
+            No Contacts
+          </Text>
+          <Text style={{ fontSize: 16, color: "#666" }}>
+            You don't have any contacts yet.
+          </Text>
+        </View>
       </View>
     );
   }
+
   const contactsGroupedByLetter = contactView.reduce(
     (groupedContacts: any, contact: any) => {
       const firstLetter = contact.name[0].toUpperCase();

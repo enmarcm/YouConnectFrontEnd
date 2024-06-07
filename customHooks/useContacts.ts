@@ -33,7 +33,6 @@ const useContacts = () => {
         config: config,
       });
 
-      console.log(data)
       setContactView(data);
       return data;
     } catch (error) {
