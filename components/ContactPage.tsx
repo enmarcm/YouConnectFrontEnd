@@ -49,14 +49,20 @@ const ContactPage: FC = () => {
           <Text style={styles.text}>Informacion de Contacto</Text>
           {/* <Text style={styles.email}>{data.email}</Text> */}
           <View style={styles.numberContainer}>
-          <TouchableOpacity
-          onPress={() => handleCallPress(data.number[0])}
+  {Array.isArray(data.number) && data.number.map((num, index) => (
+    <View key={index} style={styles.singleNumberContainer}>
+      <View style={styles.numberAndIcon}>
+        <TouchableOpacity
+          onPress={() => handleCallPress(num)}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Icon name="call-outline" size={30} color="black" />
         </TouchableOpacity>
-          <Text style={styles.number}>{data.number}</Text>
-          </View>
+        <Text style={styles.number}>{num}</Text>
+      </View>
+    </View>
+  ))}
+</View>
         </View>
       </View>
     </View>
@@ -65,7 +71,7 @@ const ContactPage: FC = () => {
 
 const styles = StyleSheet.create({
   numberContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     // justifyContent: 'center',
     // marginBottom: 20,
     alignItems: 'center',
@@ -82,6 +88,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "semibold",
     marginBottom: 10,
+  },
+  singleNumberContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  numberAndIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 40,
   },
   container: {
     flex: 1,
