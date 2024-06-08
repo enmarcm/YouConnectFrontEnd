@@ -17,6 +17,8 @@ export enum COLORS {
   BG = "#326729",
   WHITE = "#FFFFFF",
   BLACK = "#000000",
+  DELETE = "#db4141",
+
 }
 
 export enum ICONS {
@@ -43,4 +45,7 @@ export enum URL_REQUEST {
   URL_VIEW_CONTACT = `${URL_BASE}/contact/`,
   URL_ADD_GROUP = `${URL_BASE}/group/create`,
   URL_GROUP_PER_CONTACT = `${URL_BASE}/group/view/allByContact/`,
+  URL_USER = `${URL_BASE}/profile/info`,
+  URL_EDIT_USER = `${URL_BASE}/profile/update`,
+  URL_DELETE_USER = `${URL_BASE}/profile/delete`,
 }

@@ -4,17 +4,18 @@ import { COLORS } from "../enums";
 import Contacts from "./Contacts";
 import AppBarCustom from "../components/AppBarCustom";
 import GroupsView from "../components/GroupsView";
+import SettingsUser from "./Settings";
 
 const Home = () => {
   return (
     <View style={styles.container}>
       <AppBarCustom tabs={["Contacts", "Groups", "Settings"]}>
         <Contacts />
-        <View>
+        <View style={styles.container}>
           <GroupsView />
         </View>
-        <View>
-          <Text>Settings</Text>
+        <View style={styles.container}>
+          <SettingsUser />
         </View>
       </AppBarCustom>
     </View>
