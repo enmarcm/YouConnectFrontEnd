@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from "react-native";
 import { COLORS } from "../enums";
 import Contacts from "./Contacts";
 import AppBarCustom from "../components/AppBarCustom";
-import AddContact from "../components/AddContact";
 import GroupsView from "../components/GroupsView";
 
 const Home = () => {
@@ -16,9 +15,6 @@ const Home = () => {
         </View>
         <View>
           <Text>Settings</Text>
-        </View>
-        <View>
-          <AddContact />
         </View>
       </AppBarCustom>
     </View>

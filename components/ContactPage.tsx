@@ -6,13 +6,15 @@ import useContactsPage from "../customHooks/useContactsPage";
 import { Image } from "react-native"; // Import the Image component from react-native
 import { useCommunication } from "../customHooks/useCommunication";
 import Icon from "react-native-vector-icons/Ionicons";
+import useContactsGroupPage from "../customHooks/useContactGroupPage";
 
 const ContactPage: FC = () => {
   const { id } = useParams();
   const { handleCallPress, handleSmsPress } = useCommunication();
 
   const data: any = useContactsPage({ id });
-  // console.log(data);
+  const data2: any = useContactsGroupPage({ id });
+  console.log(data2);
 
   if (!data) {
     return <Text>Loading...</Text>;
@@ -47,23 +49,23 @@ const ContactPage: FC = () => {
       </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.text}>Informacion de Contacto</Text>
-          {/* <Text style={styles.email}>{data.email}</Text> */}
-          <View style={styles.numberContainer}>
-  {Array.isArray(data.number) && data.number.map((num, index) => (
-    <View key={index} style={styles.singleNumberContainer}>
-      <View style={styles.numberAndIcon}>
-        <TouchableOpacity
-          onPress={() => handleCallPress(num)}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Icon name="call-outline" size={30} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.number}>{num}</Text>
-      </View>
-    </View>
-  ))}
-</View>
+            <View style={styles.numberContainer}>
+              {Array.isArray(data.number) && data.number.map((num, index) => (
+                <View key={index} style={styles.singleNumberContainer}>
+                  <View style={styles.numberAndIcon}>
+                    <TouchableOpacity
+                      onPress={() => handleCallPress(num)}
+                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                      >
+                      <Icon name="call-outline" size={30} color="black" />
+                    </TouchableOpacity>
+                    <Text style={styles.number}>{num}</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
         </View>
+            <Text style={styles.email}>{data.email}</Text>
       </View>
     </View>
   );
