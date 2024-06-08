@@ -4,9 +4,9 @@ import {
   View,
   StyleSheet,
   ScrollView,
+  Image,
   KeyboardAvoidingView,
   Platform,
-  Text,
 } from "react-native";
 import useFetcho from "../customHooks/useFetcho";
 import { Formik } from "formik";
@@ -14,20 +14,21 @@ import FormikInputValue from "./FormikInputValue";
 import ButtonCustom from "./ButtonCustom";
 import { ROUTES, URL_REQUEST } from "../enums";
 import { useToast } from "../customHooks/useToast";
+// import addContactSchema from "../schemas/addContact";
 import { useNavigate } from "react-router-native";
-import Icon from "react-native-vector-icons/Ionicons";
-import { useSelectedContacts } from "../context/SelectContactsContext";
+// import useContacts from "../customHooks/useContacts";
 
 const AddGroup = () => {
   const { getItem } = useAsyncStorage("UserLogged");
   const fetchWithLoading = useFetcho();
   const { showToast } = useToast();
   const navigate = useNavigate();
-  const { selectedContacts, setSelectedContacts, formValues, setFormValues } =
-    useSelectedContacts();
 
-  const initialValues = formValues;
-  console.log(initialValues);
+  const initialValues = {
+    name: "",
+    description: "",
+    // maxContacts: 100,
+  };
 
   const config: any = {
     method: "POST",
@@ -40,31 +41,19 @@ const AddGroup = () => {
   };
 
   const handleSubmitFunction = async (values: any) => {
-    console.log("Valores del formulario antes de enviar:", values);
-
     let token = await getItem();
-    console.log("Token recuperado:", token);
-
     if (typeof token === "string") {
       token = token.split("Bearer ")[1].split('"')[0];
       config.headers.Authorization = "Bearer " + token;
     }
 
-    if (!values.name || !values.description) {
-      showToast("Name and description are required", "error");
-      return;
-    }
-
-    const newValues = {
-      ...values,
-      contacts: selectedContacts,
-    };
-
     try {
+      if (!values.email) delete values.email;
+
       const data = (await fetchWithLoading({
         url: URL_REQUEST.URL_ADD_GROUP,
         method: "POST",
-        body: newValues,
+        body: values,
         config: config,
       })) as any;
 
@@ -72,13 +61,12 @@ const AddGroup = () => {
         return showToast(data.error, "error");
       }
 
-      showToast("Group added", "success");
+      showToast("Contact added", "success");
+
     } catch (error) {
       console.error(error);
-      showToast("Error adding group", "error");
+      showToast("Error adding contact", "error");
     } finally {
-      setFormValues({ name: "", description: "" });
-      setSelectedContacts([]);
       navigate(ROUTES.HOME);
     }
   };
@@ -93,40 +81,26 @@ const AddGroup = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.imageContainer}>
-          <Icon name="people-circle-outline" size={150} color="#333" />
+          <Image
+            source={{ uri: "https://via.placeholder.com/150" }}
+            style={styles.profileImage}
+          />
         </View>
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmitFunction}
-          enableReinitialize
+        //   validationSchema={addContactSchema}
         >
-          {({ handleSubmit, values }) => (
+          {({ handleSubmit }) => (
             <>
+              <FormikInputValue name="name" type="name" placeholder="Name" />
               <FormikInputValue
-                name="name"
-                type="name"
-                placeholder="Name"
-                value={formValues.name}
+                name="maxContacts"
+                type="number"
+                placeholder="100"
+                onlyNumber
               />
-              <FormikInputValue
-                name="description"
-                type="text"
-                placeholder="Description"
-                value={formValues.description}
-              />
-              <ButtonCustom
-                onPress={() => {
-                  setFormValues(values);
-                  navigate("/contactSelection");
-                }}
-              >
-                Select Contacts
-              </ButtonCustom>
-              <View>
-                {selectedContacts.length > 0 && (
-                  <Text>{`${selectedContacts.length} contact(s) selected`}</Text>
-                )}
-              </View>
+              <FormikInputValue name="description" type="email" placeholder="Description" />
               <ButtonCustom onPress={handleSubmit}>Add</ButtonCustom>
             </>
           )}

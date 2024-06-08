@@ -27,7 +27,7 @@ const useGroupsPage: FC<{id:any}> = ({id}) => {
   
       try {
         const data = await fetchWithLoading({
-          url: URL_REQUEST.URL_GROUP_ID + id,
+          url: URL_REQUEST. URL_CONTACT_GROUPS + id,
           config: config,
         });
         console.log(data)

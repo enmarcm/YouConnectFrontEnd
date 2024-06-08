@@ -15,21 +15,12 @@ const FormikInputValue = ({
   type,
   placeholder,
   multiple = false,
-  initialValue = multiple ? [""] : "",
-  value: externalValue = "",  // Renombrado para evitar conflictos
   ...props
 }) => {
   const [_field, meta, helpers] = useField(name);
-  const initialValues = multiple
-    ? Array.isArray(initialValue)
-      ? initialValue
-      : [""]
-    : [initialValue];
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(multiple ? [""] : [""]);
   const [animations, setAnimations] = useState(
-    multiple
-      ? initialValues.map(() => new Animated.Value(0))
-      : [new Animated.Value(0)]
+    multiple ? [new Animated.Value(0)] : [new Animated.Value(0)]
   );
 
   useEffect(() => {
@@ -41,21 +32,6 @@ const FormikInputValue = ({
       }).start();
     });
   }, [animations]);
-
-  useEffect(() => {
-    // Actualizar el estado interno si el prop `value` cambia desde el exterior
-    if (multiple) {
-      const newValues = Array.isArray(externalValue) ? externalValue : [""]; // Asegurar que sea un arreglo
-      setValues(newValues);
-      setAnimations(newValues.map(() => new Animated.Value(1))); // Animaciones para nuevos valores
-    } else {
-      const newValue = Array.isArray(externalValue)
-        ? externalValue[0]
-        : externalValue; // Asegurar que sea un string
-      setValues([newValue]);
-      setAnimations([new Animated.Value(1)]); // Solo una animación para un valor único
-    }
-  }, [externalValue, multiple]);
 
   const handleValueChange = (value, index) => {
     if (multiple) {
