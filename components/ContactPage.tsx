@@ -65,7 +65,14 @@ const ContactPage: FC = () => {
               ))}
             </View>
         </View>
-            <Text style={styles.email}>{data.email}</Text>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.text}>Grupos</Text>
+              {Array.isArray(data2) && data2.map((group, index) => (
+                <View key={index} style={styles.singleNumberContainer}>
+                  <Text style={styles.number}>{group.name}</Text>
+                </View>
+              ))}
+            </View>
       </View>
     </View>
   );
