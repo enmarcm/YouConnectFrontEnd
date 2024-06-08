@@ -45,7 +45,16 @@ export enum URL_REQUEST {
   URL_VIEW_CONTACT = `${URL_BASE}/contact/`,
   URL_ADD_GROUP = `${URL_BASE}/group/create`,
   URL_GROUP_PER_CONTACT = `${URL_BASE}/group/view/allByContact/`,
+<<<<<<< HEAD
   URL_USER = `${URL_BASE}/profile/info`,
   URL_EDIT_USER = `${URL_BASE}/profile/update`,
   URL_DELETE_USER = `${URL_BASE}/profile/delete`,
+=======
+  URL_GROUP_ID = `${URL_BASE}/group/view/one/`,
+  URL_UPDATE_CONTACT = `${URL_BASE}/contact/update`,
+  URL_DELETE_CONTACT = `${URL_BASE}/contact/delete`,
+  URL_VIEW_GROUP = `${URL_BASE}/group/view/one/`,
+  URL_UPDATE_GROUP = `${URL_BASE}/group/update/`,
+  URL_DELETE_GROUP = `${URL_BASE}/group/delete/`,
+>>>>>>> 844257d040e5e1b66aead1348b67a9c4bf675e51
 }
