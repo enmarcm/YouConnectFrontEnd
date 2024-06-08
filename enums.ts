@@ -46,4 +46,7 @@ export enum URL_REQUEST {
   URL_GROUP_ID = `${URL_BASE}/group/view/one/`,
   URL_UPDATE_CONTACT = `${URL_BASE}/contact/update`,
   URL_DELETE_CONTACT = `${URL_BASE}/contact/delete`,
+  URL_VIEW_GROUP = `${URL_BASE}/group/view/one/`,
+  URL_UPDATE_GROUP = `${URL_BASE}/group/update/`,
+  URL_DELETE_GROUP = `${URL_BASE}/group/delete/`,
 }
