@@ -27,7 +27,7 @@ const useContactsPage: FC<{id:any}> = ({id}) => {
   
       try {
         const data = await fetchWithLoading({
-          url: URL_REQUEST.URL_VIEW_CONTACT + id,
+          url: `${URL_REQUEST.URL_VIEW_CONTACT}/${id}`,
           config: config,
         });
         console.log(data)

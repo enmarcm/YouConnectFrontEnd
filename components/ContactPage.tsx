@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigate, useParams } from "react-router-native";
 import { StyleSheet } from "react-native";
@@ -7,25 +7,15 @@ import { Image } from "react-native"; // Import the Image component from react-n
 import { useCommunication } from "../customHooks/useCommunication";
 import Icon from "react-native-vector-icons/Ionicons";
 import useContactsGroupPage from "../customHooks/useContactGroupPage";
-import { LoadingContext } from "../context/LoadingContext";
 
 const ContactPage: FC = () => {
   const { id } = useParams();
   const { handleCallPress, handleSmsPress } = useCommunication();
-  const { setIsLoading } = useContext(LoadingContext);
 
   const data: any = useContactsPage({ id });
   const data2: any = useContactsGroupPage({ id });
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!data || !data2) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
-  }, [data, data2]);
 
   return (
     <View style={styles.container}>

@@ -24,30 +24,43 @@ const EditContact = () => {
   const { showToast } = useToast();
   const fetchWithLoading = useFetcho();
   const { getItem } = useAsyncStorage("UserLogged");
-  const [initialValues, setInitialValues] = useState({
-    name: "",
-    number: "",
-    email: "",
-  });
+  const [initialValues, setInitialValues] = useState(null);
 
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const token = await getItem();
+        let token = await getItem();
+        if (typeof token === "string") {
+          token = token.split("Bearer ")[1].split('"')[0];
+        }
+
         const config = {
-          headers: { Authorization: `Bearer ${token}` },
+          credentials: "include",
+          cors: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         };
-        const data = await fetchWithLoading({
+
+        const data = (await fetchWithLoading({
           url: `${URL_REQUEST.URL_VIEW_CONTACT}/${id}`,
           method: "GET",
           config: config,
-        });
+        })) as any;
+
         if (data) {
           setInitialValues({
             name: data.name as any,
             number: data.number as any,
             email: data.email as any,
           });
+
+          console.log(data);
+        }
+
+        if (data.error) {
+          showToast(data.error, "error");
         }
       } catch (error) {
         console.error(error);
@@ -60,19 +73,29 @@ const EditContact = () => {
 
   const handleSubmitFunction = async (values) => {
     try {
-      const token = await getItem();
+      let token = await getItem();
+      if (typeof token === "string") {
+        token = token.split("Bearer ")[1].split('"')[0];
+      }
+
       const config = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(values),
       };
 
+      const newBody = {
+        contact: values,
+        id
+      }
       const data = (await fetchWithLoading({
-        url: `${URL_REQUEST.URL_UPDATE_CONTACT}/${id}`,
+        url: `${URL_REQUEST.URL_UPDATE_CONTACT}`,
         config: config,
+        method: "PUT",
+        body: newBody,
+
       })) as any;
 
       if (data.error) {
@@ -89,7 +112,11 @@ const EditContact = () => {
 
   const handleDelete = async () => {
     try {
-      const token = await getItem();
+      let token = await getItem();
+      if (typeof token === "string") {
+        token = token.split("Bearer ")[1].split('"')[0];
+      }
+
       const config = {
         method: "DELETE",
         headers: {
@@ -114,6 +141,8 @@ const EditContact = () => {
     }
   };
 
+  if (!initialValues) return null;
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -129,20 +158,28 @@ const EditContact = () => {
             style={styles.profileImage}
           />
         </View>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleSubmitFunction}
-          //   validationSchema={editContactSchema}
-        >
+        <Formik initialValues={initialValues} onSubmit={handleSubmitFunction}>
           {({ handleSubmit }) => (
             <>
-              <FormikInputValue name="name" type="name" placeholder="Name" />
+              <FormikInputValue
+                name="name"
+                type="name"
+                placeholder="Name"
+                value={initialValues.name}
+              />
               <FormikInputValue
                 name="number"
                 type="string"
                 placeholder="+584261231234"
+                value={initialValues.number}
+                multiple
               />
-              <FormikInputValue name="email" type="email" placeholder="Email" />
+              <FormikInputValue
+                name="email"
+                type="email"
+                placeholder="Email"
+                value={initialValues.email}
+              />
               <ButtonCustom onPress={handleSubmit}>Update</ButtonCustom>
               <TouchableOpacity
                 style={styles.deleteButton}
