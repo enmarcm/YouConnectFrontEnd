@@ -85,6 +85,7 @@ export interface ContactItemProps {
     number: string[];
     image: string;
   };
+  onDelete?: () => void;
 }
 export interface GroupItemProps {
   group: {
@@ -92,6 +93,7 @@ export interface GroupItemProps {
     name: string;
     description: string;
     idUser: string;
+    contact?: any
   };
 }
 

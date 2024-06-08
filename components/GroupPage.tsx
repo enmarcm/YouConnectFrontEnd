@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { View, Text, StyleSheet, SectionList } from "react-native";
 import ContactItem from "./ContactItem";
 import getItemLayout from "react-native-section-list-get-item-layout";
@@ -56,6 +56,7 @@ const GroupPage: FC = () => {
           getSectionHeaderHeight: () => 15,
         })}
       />
+      
     </View>
   );
 };
