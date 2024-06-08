@@ -15,8 +15,6 @@ import ContactPage from "./ContactPage";
 import GroupPage from "./GroupPage";
 import ToastWrapper from "./ToastWrapper";
 import AddGroup from "./AddGroup";
-import SelectContacts from "./SelectContact";
-import EditContact from "./EditContact";
 
 const Main = () => {
   useBackButtonHandler();
@@ -30,14 +28,12 @@ const Main = () => {
         <Route path={ROUTES.AUTH} element={<Auth />} />
         <Route path={ROUTES.HOME} element={<Home />}></Route>
         <Route path={ROUTES.ADDCONTACT} element={<AddContact />} />
-        <Route path="/addGroup" element={<AddGroup />} />
-        <Route path="/contactSelection" element={<SelectContacts />} />
-        <Route path="/home/contacts/:id" element={<ContactPage />} />
-        <Route path="/groups/view/:id" element={<GroupPage />} />
-        <Route path="/editContact/:id" element={<EditContact />} />
+        <Route path="/addGroup" element={<AddGroup/>} />
+        <Route path="home/contacts/:id" element={<ContactPage/>} />
+        <Route path="groups/view/:id" element = {<GroupPage/>} />
       </Routes>
       {isLoading && <Loader />}
-      <ToastWrapper />
+      <ToastWrapper/>
     </View>
   );
 };
