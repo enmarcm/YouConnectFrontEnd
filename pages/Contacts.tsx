@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     margin: 16,
     right: 0,
-    bottom: 16,
+    bottom: 12,
     backgroundColor: "#9bfabc",
   },
 });

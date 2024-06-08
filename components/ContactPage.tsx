@@ -48,7 +48,7 @@ const ContactPage: FC = () => {
 
       </View>
         <View style={styles.detailsContainer}>
-          <Text style={styles.text}>Informacion de Contacto</Text>
+          <Text style={styles.text}>Contact Info</Text>
             <View style={styles.numberContainer}>
               {Array.isArray(data.number) && data.number.map((num, index) => (
                 <View key={index} style={styles.singleNumberContainer}>
@@ -66,7 +66,7 @@ const ContactPage: FC = () => {
             </View>
         </View>
         <View style={styles.detailsContainer}>
-          <Text style={styles.text}>Grupos</Text>
+          <Text style={styles.text}>Groups</Text>
               {Array.isArray(data2) && data2.map((group, index) => (
                 <View key={index} style={styles.singleNumberContainer}>
                   <Text style={styles.number}>{group.name}</Text>
@@ -117,9 +117,6 @@ const styles = StyleSheet.create({
   ImageContainer: {
     flex: 0.3,
     backgroundColor: "#64aa54",
-    // borderTopLeftRadius: 20,
-    // borderTopRightRadius: 20,
-    // padding: 100,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
@@ -131,10 +128,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: 170,
-    height: 170,
+    width: 120,
+    height: 120,
     borderRadius: 100,
-    // marginBottom: 50,
   },
   iconContainer: {
     flexDirection: 'row',
@@ -153,13 +149,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignContent: "center",
     margin: 10,
+    fontWeight: "semibold",
     // position: "absolute",
   },
   email: {
     fontSize: 15,
     textAlign: "center",
     marginBottom: 10,
-  },
+},
   number: {
     textAlign: "center",
     color: "#333333",

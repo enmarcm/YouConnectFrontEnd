@@ -30,8 +30,8 @@ export enum ICONS {
   Groups = "people-outline",
 }
 
-const URL_BASE = "https://youconnect-production.up.railway.app";
-// const URL_BASE = "http://192.168.3.106:7878"
+// const URL_BASE = "https://youconnect-production.up.railway.app";
+const URL_BASE = "http://192.168.3.106:7878"
 
 export enum URL_REQUEST {
   URL_LOGIN = `${URL_BASE}/auth/login`,
@@ -43,4 +43,5 @@ export enum URL_REQUEST {
   URL_VIEW_CONTACT = `${URL_BASE}/contact/`,
   URL_ADD_GROUP = `${URL_BASE}/group/create`,
   URL_GROUP_PER_CONTACT = `${URL_BASE}/group/view/allByContact/`,
+  URL_GROUP_ID = `${URL_BASE}/group/view/one/`,
 }

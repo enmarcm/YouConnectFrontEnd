@@ -3,16 +3,16 @@ import { View, Text, StyleSheet } from "react-native";
 import { COLORS } from "../enums";
 import Contacts from "./Contacts";
 import AppBarCustom from "../components/AppBarCustom";
-import GroupsView from "../components/GroupsView";
+import Groups from "./Groups";
 
 const Home = () => {
   return (
     <View style={styles.container}>
       <AppBarCustom tabs={["Contacts", "Groups", "Settings"]}>
         <Contacts />
-        <View>
-          <GroupsView />
-        </View>
+
+        <Groups />
+
         <View>
           <Text>Settings</Text>
         </View>
