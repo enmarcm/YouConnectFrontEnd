@@ -11,7 +11,14 @@ const useFetcho = () => {
   const fetchWithLoading = async (params: FetchoParams) => {
     try {
       setIsLoading(true);
-      const data = await fetcho(params);
+      // Crear una promesa que se rechaza después de 15 segundos
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error("Request timed out after 15 seconds"));
+        }, 15000); 
+      });
+  
+      const data = await Promise.race([fetcho(params), timeoutPromise]);
       return data;
     } catch (error) {
       console.error(
