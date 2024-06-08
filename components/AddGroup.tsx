@@ -106,11 +106,13 @@ const AddGroup = () => {
                 name="name"
                 type="name"
                 placeholder="Name"
+                value={formValues.name}
               />
               <FormikInputValue
                 name="description"
                 type="text"
                 placeholder="Description"
+                value={formValues.description}
               />
               <ButtonCustom
                 onPress={() => {

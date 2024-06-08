@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  Image,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -16,7 +15,7 @@ import { ROUTES, URL_REQUEST } from "../enums";
 import { useToast } from "../customHooks/useToast";
 import addContactSchema from "../schemas/addContact";
 import { useNavigate } from "react-router-native";
-// import useContacts from "../customHooks/useContacts";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const AddContact = () => {
   const { getItem } = useAsyncStorage("UserLogged");
@@ -62,7 +61,6 @@ const AddContact = () => {
       }
 
       showToast("Contact added", "success");
-
     } catch (error) {
       console.error(error);
       showToast("Error adding contact", "error");
@@ -81,10 +79,7 @@ const AddContact = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: "https://via.placeholder.com/150" }}
-            style={styles.profileImage}
-          />
+          <Icon name="people-outline" size={150} />
         </View>
         <Formik
           initialValues={initialValues}

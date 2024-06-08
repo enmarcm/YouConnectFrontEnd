@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  Image,
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
@@ -17,6 +16,7 @@ import { ROUTES, URL_REQUEST } from "../enums";
 import { useToast } from "../customHooks/useToast";
 import useFetcho from "../customHooks/useFetcho";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const EditContact = () => {
   const { id } = useParams();
@@ -88,14 +88,13 @@ const EditContact = () => {
 
       const newBody = {
         contact: values,
-        id
-      }
+        id,
+      };
       const data = (await fetchWithLoading({
         url: `${URL_REQUEST.URL_UPDATE_CONTACT}`,
         config: config,
         method: "PUT",
         body: newBody,
-
       })) as any;
 
       if (data.error) {
@@ -153,10 +152,7 @@ const EditContact = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: "https://via.placeholder.com/150" }}
-            style={styles.profileImage}
-          />
+          <Icon name="create-outline" size={150} />
         </View>
         <Formik initialValues={initialValues} onSubmit={handleSubmitFunction}>
           {({ handleSubmit }) => (
