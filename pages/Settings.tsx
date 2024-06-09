@@ -111,7 +111,7 @@ const SettingsForm = () => {
 };
 
 const SettingsUser = () => {
-  const { getItem } = useAsyncStorage("UserLogged");
+  const { getItem, removeItem } = useAsyncStorage("UserLogged");
   const fetchWithLoading = useFetcho();
   const navigate = useNavigate();
 
@@ -127,6 +127,12 @@ const SettingsUser = () => {
 
   const handleSumbmit = async (values: any) => {
     console.log(values);
+  };
+
+  const handleLogOut = async () => {
+    await removeItem();
+
+    navigate(ROUTES.START);
   };
 
   const handleDelete = async () => {
@@ -181,7 +187,10 @@ const SettingsUser = () => {
         <SettingsForm />
       </Formik>
 
-      <View>
+      <View style={{ gap: 20 }}>
+        <ButtonCustom color={COLORS.BLACK} onPress={handleLogOut}>
+          LogOut
+        </ButtonCustom>
         <ButtonCustom color={COLORS.DELETE} onPress={handleDelete}>
           Delete Account
         </ButtonCustom>
