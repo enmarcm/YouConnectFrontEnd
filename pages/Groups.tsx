@@ -12,7 +12,6 @@ const Groups = () => {
   return (
     <View style={styles.container}>
       <GroupView />
-
       <FAB style={styles.fab} icon="plus" onPress={handleAddGroup} />
     </View>
   );

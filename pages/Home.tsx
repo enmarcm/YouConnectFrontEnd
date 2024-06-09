@@ -14,9 +14,7 @@ const Home = () => {
         <View style={styles.container}>
           <GroupsView />
         </View>
-        <View style={styles.container}>
           <SettingsUser />
-        </View>
       </AppBarCustom>
     </View>
   );

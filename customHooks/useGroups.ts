@@ -2,8 +2,7 @@ import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import useFetcho from "./useFetcho";
 import { useEffect, useState } from "react";
 import { URL_REQUEST } from "../enums";
-import fetcho from "../utils/fetcho";
-import { addMethod } from "yup";
+
 
 const useGroups = () => {
     const { getItem } = useAsyncStorage("UserLogged");
@@ -31,8 +30,6 @@ const useGroups = () => {
       url: URL_REQUEST.URL_GROUPS,
       config: config,
     });
-    // console.log(groups);
-
       setContactGroups(groups);
       return groups;
   } catch (error) {

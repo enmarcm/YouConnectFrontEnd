@@ -1,10 +1,5 @@
 import { FC } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import { useNavigate } from "react-router-native";
 import { GroupItemProps } from "../types";

@@ -9,7 +9,7 @@ const GroupView = () => {
   if (!Array.isArray(groups) || groups.length === 0) {
     return (
       <View style={styles.noGroupsContainer}>
-        <Text style={styles.noGroupsText}>No Groups</Text>
+        <Text style={styles.noGroupsText}>No Groups in the account</Text>
       </View>
     );
   }
